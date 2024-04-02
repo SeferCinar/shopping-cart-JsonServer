@@ -1,30 +1,45 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+  export default {
+    data: () => {
+      return{
+        page:"products",
+      }
+    },
+    components:{
+      Products:Products,
+      Cart:Cart
+    },
+    methods:{
+      navigateTo(page){
+        this.page = page
+      }
+      
+    }
+  }
+  import Products from './components/Products.vue'
+  import Cart from './components/Cart.vue'
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+ <div>
+
+  <div class="navbar">
+    <button class="navbarBtn" v-on:click="navigateTo('products')">Alışverişe devam et</button> 
+    <button class="navbarBtn" v-on:click="navigateTo('cart')">Sepete git</button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
+  <div v-if="this.page == 'products'">
+  <Products/>
+  </div>
+  <div v-if="this.page == 'cart'">
+  <Cart/>
+  </div>
+ </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.navbarBtn{
+  margin-left: 200px;
+  margin-right: 200px;
 }
 </style>
